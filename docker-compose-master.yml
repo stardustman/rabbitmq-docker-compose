@@ -1,0 +1,21 @@
+version: '3'
+
+services:
+
+  rabbitmq:
+    image: "rabbitmq:3.7-management"
+    hostname: "rabbitmaster"
+    environment: 
+      - RABBITMQ_ERLANG_COOKIE=key_secrets
+      - RABBITMQ_NODENAME=rabbitmaster
+    ports:
+      - "15672:15672"
+      - "5672:5672"
+      - "4369:4369"
+      - "25672:25672"
+    labels:
+      NAME: "rabbitmqmaster"
+    volumes:
+      - "./rabbitmq:/etc/rabbitmq/rabbitmq.config"
+      - "./definitions.json:/etc/rabbitmq/definitions.json"
+      - "/opt/rabbitmq_data_master:/var/lib/rabbitmq/mnesia/rabbitmaster"
