@@ -1,8 +1,8 @@
 FROM rabbitmq:3.7-management
 
-ARG MASTER_IP
-ADD ./slave_join.sh /slave_join.sh
-RUN ["chmod", "+x", "/slave_join.sh"]
+ADD ./slave_join.sh /root/slave_join.sh
+RUN ["chmod", "+x", "/root/slave_join.sh"]
+RUN /root/slave_join.sh
 WORKDIR /root
 
 
