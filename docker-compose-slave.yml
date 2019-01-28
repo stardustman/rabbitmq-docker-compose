@@ -8,7 +8,7 @@ services:
      args:
       - MASTER_IP=192.168.1.127
     hostname: "rabbitslave"
-    environment: 
+    environment:
       - RABBITMQ_ERLANG_COOKIE=key_secrets
       - RABBITMQ_NODENAME=rabbitslave
     ports:
@@ -18,11 +18,12 @@ services:
       - "25672:25672"
     labels:
       NAME: "rabbitmqslave"
+    extra_hosts:
+      - "rabbitmaster:${MASTER_IP}"
     volumes:
       - "./rabbitmq:/etc/rabbitmq/rabbitmq.config"
       - "./definitions.json:/etc/rabbitmq/definitions.json"
-      - "./slave_join.sh:/usr/local/bin/slave_join.sh"
-      - "./add_hosts.sh:/usr/local/bin/add_hosts.sh"
+      - "./slave_join.sh:/slave_join.sh"
       - "/opt/rabbitmq_data_slave:/var/lib/rabbitmq/mnesia/rabbitslave"
-    command: 
-      - slave_join.sh
+    tty: true
+    stdin_open: true
