@@ -2,8 +2,7 @@ version: '3'
 
 services:
   rabbitmq:
-    build:
-     context: .
+    image: "rabbitmq:3.7-management"
     hostname: "${SLAVE_NAME}"
     environment:
       - RABBITMQ_ERLANG_COOKIE=key_secrets
@@ -21,6 +20,8 @@ services:
       - "./rabbitmq:/etc/rabbitmq/rabbitmq.config"
       - "./definitions.json:/etc/rabbitmq/definitions.json"
       - "./slave_join.sh:/slave_join.sh"
-      - "/opt/rabbitmq_data_slave:/var/lib/rabbitmq/mnesia/rabbitslave"
+      - "rabbitslave:/var/lib/rabbitmq"
     tty: true
-    stdin_open: true
+volumes:
+  rabbitslave:
+    driver: local

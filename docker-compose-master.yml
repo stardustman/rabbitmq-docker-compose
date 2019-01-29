@@ -13,9 +13,13 @@ services:
       - "5672:5672"
       - "4369:4369"
       - "25672:25672"
+    tty: true
     labels:
       NAME: "rabbitmqmaster"
     volumes:
       - "./rabbitmq:/etc/rabbitmq/rabbitmq.config"
       - "./definitions.json:/etc/rabbitmq/definitions.json"
-      - "/opt/rabbitmq_data_master:/var/lib/rabbitmq/mnesia/rabbitmaster"
+      - "rabbitmaster:/var/lib/rabbitmq"
+volumes:
+  rabbitmaster:
+    driver: local
