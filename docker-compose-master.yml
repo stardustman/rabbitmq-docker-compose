@@ -3,7 +3,7 @@ version: '3'
 services:
 
   rabbitmq:
-    image: "rabbitmq:3.7-management"
+    image: "rabbitmq:3.10-management"
     deploy:
       restart_policy:
         condition: on-failure
@@ -22,6 +22,10 @@ services:
     tty: true
     labels:
       NAME: "rabbitmqmaster"
+    extra_hosts:
+      - "rabbitmaster:192.168.218.129" # clone1
+      - "rabbitslave1:192.168.218.130" # clone2
+      - "rabbitslave2:192.168.218.131" # clone3
     volumes:
       - "./rabbitmq:/etc/rabbitmq/rabbitmq.config"
       - "./definitions.json:/etc/rabbitmq/definitions.json"

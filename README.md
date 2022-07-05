@@ -36,3 +36,8 @@ Run slave_join.sh in your slave container for join to master cluster.
 docker ps
 docker exec -it yourContainerID bash slave_join.sh
 ```
+
+
+# Refs
+
+1. [extra_hosts](https://docs.docker.com/compose/compose-file/#extra_hosts)

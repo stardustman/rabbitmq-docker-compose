@@ -21,7 +21,9 @@ services:
     labels:
       NAME: "${SLAVE_NAME}"
     extra_hosts:
-      - "rabbitmaster:${MASTER_IP}"
+      - "rabbitmaster:${MASTER_IP}" #clone1
+      - "rabbitslave1:192.168.218.130" #clone2
+      - "rabbitslave2:192.168.218.131" #clone3
     volumes:
       - "./rabbitmq:/etc/rabbitmq/rabbitmq.config"
       - "./definitions.json:/etc/rabbitmq/definitions.json"
